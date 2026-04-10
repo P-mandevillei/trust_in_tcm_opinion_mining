@@ -1,0 +1,95 @@
+[
+  {
+    "condition": "flu",
+    "tcm": [
+      {
+        "cn": ["连花清瘟", "连花清瘟胶囊", "连花清瘟颗粒"],
+        "en": ["Lianhua Qingwen", "Lianhua Qingwen Capsule", "Lianhua Qingwen Granule", "Forsythia-Honeysuckle Capsule"]
+      },
+      {
+        "cn": ["板蓝根", "板蓝根颗粒"],
+        "en": ["Banlangen", "Ban Lan Gen", "Isatis root", "Ban Lan Gen Granule"]
+      },
+      {
+        "cn": ["银翘解毒", "银翘散", "银翘片"],
+        "en": ["Yinqiao", "Yin Qiao", "Yinqiao Jiedu", "Yinqiao Jiedu Tablet", "Lonicera and Forsythia", "Yin Qiao Jie Du Pian", "Yin Chiao Chieh Tu Pien", "Yin Chiao Tablets", "Cold Signoff", "Honeysuckle and Forsythia"]
+      }
+    ],
+    "ebm": [
+      {
+        "cn": ["奥司他韦", "达菲"],
+        "en": ["Tamiflu", "Oseltamivir"]
+      },
+      {
+        "cn": ["布洛芬", "芬必得", "美林", "布洛芬混悬液"],
+        "en": ["Ibuprofen", "Advil", "Motrin", "NSAID", "Non-steroidal anti-inflammatory drug"]
+      },
+      {
+        "cn": ["对乙酰氨基酚", "扑热息痛", "泰诺", "泰诺林", "必理通", "散列通"],
+        "en": ["Acetaminophen", "Paracetamol", "Tylenol", "Panadol"]
+      }
+    ]
+  },
+  {
+    "condition": "diabetes",
+    "tcm": [
+      {
+        "cn": ["消渴丸"],
+        "en": ["Xiaoke Wan", "Xiaoke Pill", "Xiao Ke", "LW Thirst Relief Dietary Supplement"]
+      },
+      {
+        "cn": ["六味地黄丸"],
+        "en": ["Liuwei Dihuang Wan", "Six Ingredient Rehmannia", "Rehmannia Six Formula", "Six Flavor Rehmannia Teapills", "Longevity Blend"]
+      },
+      {
+        "cn": ["黄连", "黄连素"],
+        "en": ["Coptis", "Coptis Rhizome", "Huanglian", "Huang Lian", "Coptis chinensis", "Chinese Goldthread", "Coptis Root", "Berberine"]
+      }
+    ],
+    "ebm": [
+      {
+        "cn": ["二甲双胍", "格华止"],
+        "en": ["Metformin", "Glucophage", "metformin hydrochloride", "Glucophage XR", "Fortamet", "Glumetza", "Riomet", "Axpinet", "Diagemet", "Glucient", "Metabet"]
+      },
+      {
+        "cn": ["格列美脲", "亚莫利"],
+        "en": ["Glimepiride", "Amaryl"]
+      },
+      {
+        "cn": ["胰岛素"],
+        "en": ["Insulin", "lispro", "aspart", "glulisine", "glargine", "detemir", "Humalog", "NovoLog", "Lantus", "Tresiba", "Fiasp"]
+      }
+    ]
+  },
+  {
+    "condition": "eczema",
+    "tcm": [
+      {
+        "cn": ["黄柏液", "复方黄柏液", "复方黄柏液涂剂"],
+        "en": ["Phellodendron Liquid", "Phellodendron Bark Liquid", "Compound Phellodendron Liquid Paint", "Amur Corktree Bark Liquid", "Compound Phellodendron Lotion"]
+      },
+      {
+        "cn": ["青石软膏"],
+        "en": ["Qingshi Antipruritic Ointment", "Qingshi Ointment", "Qingshi Zhiyang Ointment"]
+      },
+      {
+        "cn": ["丹皮酚软膏"],
+        "en": ["Danpifen Ruangao", "Danpifen", "Paeonol", "Paeonol Ointment", "Paeonol Cream"]
+      }
+    ],
+    "ebm": [
+      {
+        "cn": ["氢化可的松", "糖皮质激素", "可的松", "尤卓尔", "激素药膏", "激素药"],
+        "en": ["Hydrocortisone", "Glucocorticoid", "Cortisone", "Steroid cream", "Topical steroids"]
+      },
+      {
+        "cn": ["糠酸莫米松", "艾洛松"],
+        "en": ["Mometasone furoate", "Elocon", "Momexin"]
+      },
+      {
+        "cn": ["炉甘石洗剂", "炉甘石"],
+        "en": ["Calamine lotion", "Calamine", "Caladryl", "Calagesic", "Ivarest", "Calahist", "Calamine Plain"]
+      }
+    ]
+  }
+]
