@@ -39,7 +39,7 @@
 \fancyhf{}
 \lhead{\textbf{\StudentName}}
 \chead{\textbf{\StudentID}}
-\rhead{}
+\rhead{COMPLITTHT 4320 Lab Report}
 \cfoot{\thepage}
 
 % preferred pseudocode style
@@ -60,20 +60,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Post-COVID Trust in Traditional Chinese Medicine(TCM): A Comparative Opinion Mining Study}
+\title{Post-COVID Trust in Traditional Chinese Medicine\\[0.5em] \large A Comparative Opinion Mining Study}
 \author{Charlie Li}
 \date{\today}
 \begin{document}
 \maketitle
-
-1. Introduction (hypothesis, summary of data, methods and results)
-2. Hypothesis (explain reasoning behind hypothesis)
-3. Data (describe and defend your dataset, as well as how you compiled it)
-4. Method (describe and defend your methodology)
-5. Analysis with visualizations (Represent the relevant parts of your results using effective
-visualizations appropriate to the method and research question)
-6. Results (Summarize findings and how they adhere to or differ from your hypothesis)
-7. Conclusion (explain avenues for further exploration or research based on your findings)
 
 \section{Introduction}
 
@@ -81,10 +72,15 @@ Traditional Chinese Medicine (TCM) employs acupuncture and herbal decoctions, am
 
 Social media platforms are vast reservoirs of public opinions, with online anonymity promoting the expression of uncensored thoughts. While social media connect users across geographic locations and facilitates communication, it can also amplify rumors and affect people's decision making, especially in certain healthcare domains like vaccination \parencite{piedrahitavalds_2021_vaccine}. Therefore, monitoring the trend of sentiments on social media is crucial to understanding public opinion towards healthcare and devicing public health interventions.
 
-In this study, we investigate public trust in TCM versus EBM as expressed on social media platforms across three comparative dimensions: relative to each other, temporally (during and post-COVID), and geoculturally (China versus English-speaking countries). We hypothesize a moderately lower but increasing trust in TCM compared to EBM in China and a significantly lower trust in TCM compared to EBM in English-speaking countries, with a stronger preference for TCM in China.
+In this study, I investigate public trust in TCM versus EBM as expressed on social media platforms across three comparative dimensions: relative to each other, temporally (during and post-COVID), and geoculturally (China versus English-speaking countries). I hypothesize a moderately lower but increasing trust in TCM compared to EBM in China and a significantly lower trust in TCM compared to EBM in English-speaking countries, with a stronger preference for TCM in China.
 
+I scraped 18,038 social media posts (12,806 Weibo, 5,232 Reddit) published between 2019 and 2026 and mentioning TCM or EBM keywords belonging to three condition categories: flu, diabetes and eczema. This dataset resulted in 31,430 entries of unique post-keyword pairs. I then performed Abstract-Based Sentiment Analysis (ABSA) to extract components directly associated with the medicine of interest and determine the sentiment polarity of each post toward the medicine. To better capture the nuance of trust, I fine-tuned a language model based on manual annotations of 637 posts to classify each post as either trust, neutral or distrust. Statistical analyses are then performed to compare public sentiment and trust in TCM versus EBM across the three dimensions.
+
+Results show a nuanced landscape of public trust with differences by method of measurement and condition category. I found a generally increasing post-COVID trust in TCM in China but not in English-speaking countries. While Chinese netizens have mixed emotions toward TCM, they trust it more than EBM when compared to English-speaking netizens. Most of these results are driven by low-engagement posts instead of public consensus.
 
 \section{Hypothesis}
+
+My overall hypothesis can be broken down into three dimensions that can be tested more easily: the temporal shift (increasing trust in TCM post-COVID), the categorical difference (moderately or significantly lower trust in TCM compared to EBM post-COVID), and the geocultural difference (stronger preference for TCM in China).
 
 Temporally, the extensive use of TCM in China during the pandemic is hypothesized to have a positive effect on public trust in TCM, which is supported by studies on public opinions during COVID. Using sentiment analysis on 215,565 Weibo (the Chinese equivalent of former Twitter or X) posts published from Jan 24, 2020 to Mar 31, 2020, \textcite{gao_2021_weibo} examined public opinions toward TCM during the pandemic and reported 12\% positive emotions as opposed to 10\% negatives. Upon closer examination, they found that many negative emotions are not aimed at TCM and concluded their study with a generally positive attitude towards TCM. Similarly, \textcite{wang_2024_useful} found a generally supportive attitude toward TCM by manually analyzing 1954 responses on Zhihu (the Chinese equivalent of Quora) posted from Dec 1, 2019 to Feb 28, 2023. This positive effect is hypothesized to result in an increased trust in TCM post-COVID in China. TCM in the flu category are closely adjacent to the treatment of COVID and therefore are hypothesized to see a significant increase in public trust in China, while those in the other two categories are likely to see a milder effect. With the large amount of discussions centered around TCM, I further hypothesize a mild spill-over effect by which English-speaking netizens are exposed to TCM online. Despite the scarcity of coverage on TCM in English-speaking countries, this effect is hypothesized to increase public trust in TCM outside of China.
 
@@ -95,7 +91,8 @@ Given that TCM receives much more attention in China compared to English-speakin
 The geocultural hypothesis summarizes the temporal and relative effects. Given a larger increase in post-COVID trust in TCM in China compared to that in English-speaking countries, I expect to see a stronger post-COVID preference for (or weaker disfavor of) TCM over EBM in China compared to English-speaking countries.
 
 \section{Data}
-My corpus consists of 5232 Reddit posts and 12806 Weibo posts, totaling 18038 posts, published between year 2019 and 2026. This time spans from the pandemic (2019-2023) to post-pandemic (2024-2026) periods, allowing for temporal analyses. Posts are gathered through web scraping: Reddit was scraped using its json API on March 28, 2026, while Weibo was scraped using the open-source software MediaCrawler from April 5 to April 6, 2026.
+
+My corpus consists of 5,232 Reddit posts and 12,806 Weibo posts, totaling 18,038 posts, published between year 2019 and 2026. This time spans from the pandemic (2019-2023) to post-pandemic (2024-2026) periods, allowing for temporal analyses. Posts are gathered through web scraping: Reddit was scraped using its json API on March 28, 2026, while Weibo was scraped using the open-source software MediaCrawler from April 5 to April 6, 2026.
 
 Since TCM and EBM are vast fields, directly gathering posts mentioning them is likely to result in extremely noisy data. Moreover, while TCM is a neutral phrase in Chinese, EBM ("Western Medicine") is almost exclusively used in debates over TCM in China, and its variants such as "modern medicine" in English similarly carry opinions by themselves. Therefore, searching for posts mentioning EBM is almost guaranteed to skew the results toward polarization. To narrow the focus, I developed a list of medicine names covering three condition categories: flu, diabetes, and eczema. Flu is chosen due to its relevance to COVID. It is an acute condition, while diabetes and eczema are both chronic diseases. Treatments for eczema involve topical creams, while those for flu and diabetes are predominantly oral or injections. Therefore, the choice of conditions maximize coverage of different kinds of medications. Under each category, I picked three common medicines in both TCM and EBM, resulting in a list of 18 medicine names (table \ref{tab:medicine_list}). The list further includes all common variants and commercial names of these medicines. I searched for and filtered posts based on the list of medicine keywords.
 \begin{table}[htbp]
@@ -256,7 +253,7 @@ The model is re-trained on the entire labeled set with a hard stop at 15 iterati
 
 \subsection{Statistical Analyses}
 
-Both ABSA and ML results are aggregated based on their publishing time, with COVID period defined as publishing time between year 2019 and 2023 and post-COVID as year 2024 and after. Statistical tests are performed on both the ABSA and ML results to answer each of the three comparative questions. To account for community consensus and visibility, each analysis is performed first on post counts and then repeated using data weighteed by user upvotes. All tests are performed at a significance level of $\alpha=0.05$ with Bonferroni correction to control for false positive rates during multiple comparisons.
+Both ABSA and ML results are aggregated based on their publishing time, with COVID period defined as publishing time between year 2019 and 2023 and post-COVID as year 2024 and after. Statistical tests are performed on both the ABSA and ML results to answer each of the three comparative questions. Since my research question focuses on trust, the statistical tests are performed to compare the number of positive/trustful posts. To account for community consensus and visibility, each analysis is performed first on post counts and then repeated using data weighteed by user upvotes. All tests are performed at a significance level of $\alpha=0.05$ with Bonferroni correction to control for false positive rates during multiple comparisons.
 \begin{enumerate}
     \item \textbf{Temporal Shifts:} Is there a difference between COVID and post-COVID opinions on the same types of medicines?
     \begin{itemize}
@@ -309,6 +306,8 @@ Figure \ref{fig:absa} shows the average normalized sentiment scores by medicine 
     \label{fig:weighted_absa}
 \end{figure}
 
+Comparisons of the percentages of posts with positive sentiments across time periods and medicine types are shown in figure \ref{fig:absa_within}, and upvote-weighted results are shown in figure \ref{fig:weighted_absa_within}. Bars with asterisks indicate statistically significant differences between the two categories underneath each edge of the bar. With raw counts, we see a temporal shift in the relative positivity towards EBM flu and eczema medicines on Weibo, but this relationship is not statistically significant when weighted by upvotes. A significant difference in the relative positivity toward TCM versus EBM is observed for all three condition types on Weibo post-COVID, with TCM being more positive for flu medicines and less positive for diabetes and eczema. On Reddit, TCM is more positive than EBM for diabetes medicines. When weighted by upvotes, the only significant difference is that TCM diabetes medicines are less positive than EBM diabetes medicines on Weibo.
+
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\linewidth, keepaspectratio]{../../results/within.png}
@@ -322,6 +321,8 @@ Figure \ref{fig:absa} shows the average normalized sentiment scores by medicine 
     \caption{Upvote-weighted percent positive posts by medicine type and platform, with siginificant within-platform differences labeled.}
     \label{fig:weighted_absa_within}
 \end{figure}
+
+Cross-platform comparisons are shown in figure \ref{fig:absa_between} and \ref{fig:weighted_absa_between}, with the latter weighted by upvotes. Table \ref{tab:absa_ratio} shows the significance levels of the differences in ratios of TCM to EBM positive posts for each medicine type between platforms post-COVID, and vertical bars with asterisks in the figures indicate significant DiD results for post-COVID positive posts by condition category, i.e. differences in platform preference for TCM over EBM. Consistent platform preference differences are observed for diabetes medicines, where Reddit users hold a significantly more positive attitude toward TCM than Weibo users, both with raw counts and when weighted by upvotes. Reddit users prefer TCM flu medicines to EBM flu medicines more than Weibo users do when looking at raw counts, but this difference is not statistically significant when weighted by upvotes. Although the ratios of relative positivity are different for eczema medicines, the difference in absolute differences (DiD result) is small and not statistically significant.
 
 \begin{figure}[htbp]
     \centering
@@ -337,7 +338,25 @@ Figure \ref{fig:absa} shows the average normalized sentiment scores by medicine 
     \label{fig:weighted_absa_between}
 \end{figure}
 
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|l|l|l|l|}
+        \hline
+        \textbf{} & \textbf{Diabetes} & \textbf{Eczema} & \textbf{Flu} \\
+        \hline
+        \textbf{Raw Counts} & 0.0 (*) & 0.0 (*) & 0.0011 (*) \\
+        \hline
+        \textbf{Upvote Weighted} & 0.01 (*) & 0.016 (*) & 0.528 \\
+        \hline
+    \end{tabular}
+    \caption{Significance levels of the differences in ratios of TCM to EBM positive posts for each medicine type between platforms post-COVID. Asterisks indicate statistically significant differences.}
+    \label{tab:absa_ratio}
+\end{table}
+
 \subsection{ML Classification}
+
+Figure \ref{fig:ml_within} shows the percentages of trustful posts by time period, medicine type, and platform, while figure \ref{fig:weighted_ml_within} shows the upvote-weighted comparisons. Statistically significant differences are labeled with asterisks above the bars. Looking at the raw counts, we see an increase in trust in TCM flu and diabetes medicines on Weibo post-COVID, but a decrease in trust in EBM diabetes medicines. A significantly higher trust in TCM than EBM flu and diabetes medicines is observed post-COVID on Weibo. On Reddit, none of the differences are statistically significant. When weighted by upvotes, most of the differences become non-significant, but there is a significant decrease in trust in EBM diabetes medicines post-COVID on Reddit.
 
 \begin{figure}[htbp]
     \centering
@@ -350,8 +369,10 @@ Figure \ref{fig:absa} shows the average normalized sentiment scores by medicine 
     \centering
     \includegraphics[width=0.8\linewidth, keepaspectratio]{../../results/ml/like_weighted_trust_within.png}
     \caption{Upvote-weighted percent trustful posts by medicine type and platform, with siginificant within-platform differences labeled.}
-    \label{fig:weighted_absa_within}
+    \label{fig:weighted_ml_within}
 \end{figure}
+
+Figure \ref{fig:ml_between} shows the significant differences between platform preferences for types of medicines, with asterisks indicating statistically significant difference-in-differences of the post-COVID percentages of trustful posts. Upvote-weighted results are not shown since none of the differences are statistically significant. Table \ref{tab:ml_ratio} shows the significance levels of the differences in ratios of TCM to EBM trustful posts for each medicine type between platforms post-COVID. There is a prominent difference in platform preferences for all three condition categories when looking at raw counts (supported by both ratio test and DiD), with Weibo users showing significantly higher trust (or lower distrust) for TCM over EBM compared to Reddit users. When weighted by upvotes, however, the platform preferences are no longer statistically significant.
 
 \begin{figure}[htbp]
     \centering
@@ -360,7 +381,82 @@ Figure \ref{fig:absa} shows the average normalized sentiment scores by medicine 
     \label{fig:ml_between}
 \end{figure}
 
-\printbibliography[heading=centeredbib, title={References}]
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|l|l|l|l|}
+        \hline
+        \textbf{} & \textbf{Diabetes} & \textbf{Eczema} & \textbf{Flu} \\
+        \hline
+        \textbf{Raw Counts} & 0.0 (*) & 0.0 (*) & 0.0 (*) \\
+        \hline
+        \textbf{Upvote Weighted} & 0.904 & 0.028 & 0.274 \\
+        \hline
+    \end{tabular}
+    \caption{Significance levels of the differences in ratios of TCM to EBM trustful posts for each medicine type between platforms post-COVID. Asterisks indicate statistically significant differences.}
+    \label{tab:ml_ratio}
+\end{table}
 
+\section{Discussion}
+
+Overall, we see a nuanced effect of the COVID-19 pandemic on attitudes toward TCM and EBM on Weibo and Reddit.
+
+\subsection{Overall Trends in ABSA Sentiments}
+
+Looking at the trend of the average sentiment scores (figure \ref{fig:absa}), we see that the overall sentiments regarding EBM is more stable than those of TCM. While sentiments differ more greatly on Weibo between TCM and EBM, the difference is less pronounced on Reddit. When weighted by upvotes (figure \ref{fig:weighted_absa}), the fluctuations on Weibo become more prominent, while the sentiments on Reddit remain stable, which is consistent with my hypothesis of amplified effects on Weibo, especially towards TCM. Focusing on the unweighted results, we see a clear more negative sentiment for TCM eczema medicines compared to EBM on Weibo across all time periods studied, while for post-COVID periods, an overall more negative sentiment for TCM diabetes medicines compared to EBM is observed on Weibo, with a more positive sentiment for TCM flu medicines. These results do not fit my hypothesis cleanly. Instead of a lower sentiment towards TCM compared to EBM on Reddit, we observe close trends between the two that remain stable with time except for two dips. We do observe an increase in positive sentiments toward TCM for flu on Weibo, but this trend is not as prominent for the other two condition categories. Chinese netizens express a more positive sentiment toward TCM flu medicine than EBM, which is opposite to my hypothesis of a moderately lower trust in TCM. However, note that these conclusions are crude observations that are not statistically tested, and sentiment scores may not be reflective of trust.
+
+Note an interesting spike in sentiments for TCM flu medicines on Weibo in year 2021 (a less prominent spike is seen for TCM diabetes medicines on Weibo around the same period). It is possible that the spike is related to the government's promotion of TCM rather than a reflection of public opinion, given that Weibo is among the more heavily censored social media platforms in China. Interestingly, a dip in sentiments for TCM flu and eczema medicines is observed on Reddit in 2024, which is the year following the official end of the pandemic. It is unclear whether this dip is associated with the end of the pandemic, as it is not observed on Weibo where the effect on TCM is hypothesized to be amplified.
+
+When weighted by upvotes, these effects are overshadowed by the prominent fluctuations, making them hard to interpret. However, overall sentiments on TCM follow closely with those on EBM on both platforms, and the spike in sentiments for TCM flu medicines on Weibo in 2021 remains, indicating public consensus on the positivity of TCM flu medicines to some degree, even if the original posts were promotional efforts.
+
+\subsection{Temporal Shifts}
+
+For ABSA results, the only observed temporal shifts in attitudes are the increase in positive sentiments toward EBM for flu and eczema medicines on Weibo post-COVID. This counters with my hypothesis of a significant increase in positive attitudes toward TCM in China, especially toward flu medicines that are directly related to the pandemic. However, it is a completely reasonable result given that EBM were the main treatment strategy for COVID-19, and the successful control of the pandemic in China could have increased public trust towards EBM. The increase in positivity towards eczema medicine could be unrelated to the pandemic, or it could be due to the hypothesized spill-over effect from flu medicines. However, both observed effects diminish when weighted by upvotes, suggesting that these increases may be driven by posts with lower engagement. When public consensus is considered, no significant temporal shifts in positive sentiments are observed.
+
+Completely different trends are observed for ML classification results. We see a significant increase in trust in TCM medicines for both flu and diabetes on Weibo post-COVID, with a significant decrease in trust in EBM diabetes medicines. The increase in trust in TCM medicines on the Chinese platform is consistent with my hypothesis, but the decrease in trust in EBM diabetes medicines is not. It is hard to propose an explanation for that decrease without further investigation of the content of the posts. When weighted by upvotes, these effects diminish, but a significant post-COVID decrease in trust in EBM diabetes medicines on Reddit is observed instead. The fact that trust in EBM diabetes medicines decreases on both platforms when investigated with different methods is interesting, and likely signifies an underlying issue with EBM diabetes medicines.
+
+Overall, on Weibo we find a post-COVID increase in positivity towards EBM flu and eczema medicines, and a post-COVID increase in trust in TCM flu and diabetes medicines, but both effects are driven by posts with lower engagement. Trust in EBM diabetes medicines decreases on Weibo (unweighted) and Reddit (upvote-weighted).
+
+\subsection{Post-COVID Opinions on TCM versus EBM}
+
+Mixed results are observed for ABSA sentiment scores between post-COVID posts for different condition categories. On Weibo, positivity toward TCM is higher than EBM for flu medicines but lower for both diabetes and eczema medicines. On the other hand, positivity toward TCM is higher than EBM for diabetes medicines on Reddit. When weighted by upvotes, however, the only effect that remains significant is the lower positivity toward TCM diabetes medicines on Weibo. This consistently lower positivity provides strong evidence that Chinese netizens view TCM diabetes medicines less positively than EBM diabetes medicines. The lower positivity is consistent with my hypothesis of a lower trust in TCM. However, the higher positivity toward TCM flu medicines on Weibo and diabetes medicines on Reddit is opposite to my hypothesis.
+
+Results are more consistent for ML classification. On Weibo, significantly higher trust is observed for TCM flu and diabetes medicines post-COVID compared to EBM, which is driven by low-engagement posts as these effects diminish when weighted by upvotes. This contradicts my hypothesis of a lower trust in TCM.
+
+\subsection{Geocultural Preferences}
+
+For ABSA sentiment results, we observe a lower preference for TCM flu medicines on Weibo than on Reddit, which is opposite to my hypothesis of a smaller difference between the trust in TCM and EBM in China. However, this effect is non-significant when weighted by upvotes. On the other hand, we observe a significant difference in platform preferences for diabetes medicines: Weibo users prefer EBM while Reddit users prefer TCM, and this difference is robust when weighted by upvotes. This contradicts my hypothesis of Weibo users showing a stronger preference for (or a weaker disfavor of) TCM compared to Reddit users.
+
+When we look at the ML classifications, however, Weibo users consistently show a stronger preference for TCM medicines than Reddit users across all three condition categories, which is consistent with my hypothesis. This effect is non-significant when weighted by upvotes, however.
+
+\subsection{Combining The Dimensions}
+
+Combining the three dimensions provides a comprehensive picture of the differences in public opinions on TCM. For flu medicines, we observe a higher positivity on Weibo and a higher, increasing trust on Weibo toward TCM than EBM, both driven by lower-engagement posts. Sentiments show a higher preference for TCM on Reddit compared to Weibo, while trust shows the opposite, with both effects driven by low-engagement posts.
+
+For diabetes medicines, we observe a lower positivity toward TCM than EBM on Weibo that appear to be the public consensus, with a higher positivity toward TCM on Reddit that is driven by low-engagement posts. A higher, increasing trust in TCM is observed together with a lower, decreasing trust in EBM on Weibo driven by low-engagement posts, while a decreasing trust in EBM on Reddit appear to be the public consensus. Sentiments show as public consensus that Reddit users prefer TCM while Weibo users prefer EBM, but trust shows the opposite: Weibo users prefer TCM stronger than Reddit users, which is driven by low-engagement posts.
+
+Although the low sample size of TCM eczema posts mandates caution in interpreting the results, we observe a lower positivity toward TCM compared to a higher but decreasing positivity toward EBM on Weibo driven by low-engagement posts, with no significant absolute differences in platform preferences. No difference in trust is observed on either platform, but Reddit users show a stronger preference for EBM compared to the lack of preference on Weibo, an effect driven by low-engagement posts.
+
+These findings reveal a nuanced, disease-specific picture of public opinions on TCM that partly support and partly challenge my hypothesis. In addition, low-engagement posts appear to be the main driver of the observed differences in public opinions on TCM.
+\begin{itemize}
+    \item \textbf{In China, moderately lower but increasing trust in TCM compared to EBM}: While a lower positivity is observed for TCM eczema and diabetes medicines compared to EBM, a higher and increasing trust is found for TCM flu and diabetes medicines. These results indicate that there is a stronger fundational support for TCM in China than I initially predicted, but that this trust is not universal across all conditions and can differ by method of measurement.
+    \item \textbf{In English-speaking countries, significantly lower trust in TCM compared to EBM}: Surprisingly, this hypothesis is contradicted. No significant difference in either positivity or trust is found between TCM and EBM for eczema and flu medicines, while a higher positivity is observed for TCM diabetes medicines. A decreasing trust in EBM is also observed for diabetes medicines.
+    \item \textbf{Stronger preference for TCM in China}: While sentiment analysis shows mixed results, this hypothesis is supported by trust classifications unanimously across all three condition categories. This suggests that Chinese netizens, despite having mixed feelings about TCM, generally trust it more than EBM.
+\end{itemize}
+
+\section{Conclusion}
+
+Through opinion mining on Weibo and Reddit, I investigated public trust in TCM comparatively across medicine types, time periods, and platforms. I found a nuanced picture of public trust that depends on the condition being treated and the method of measurement, with low-engagement posts driving the observed differences. While Weibo users express less positive sentiments for TCM eczema and diabetes medicines compared to EBM, they exhibit higher trust in TCM flu and diabetes medicines that increases over time. On the other hand, Reddit users treat TCM and EBM with similar attitudes with the exception of diabetes medicines, for which they express higher positivity toward TCM. While Weibo users express mixed sentiments about TCM, they generally trust it more than EBM compared with Reddit users. Together, these findings suggest that trust in TCM has generally increased in China post-COVID but not in English-speaking countries, and that Chinese netizens view TCM more favorably than English-speaking netizens.
+
+My study has several limitations. First, as found by \textcite{gao_2021_weibo}, sentiment analysis frequently misattribute emotions to unrelated aspects due to the complexity of human language. Although I aimed at minimizing this issue by using ABSA to extract the relevant components, sentiments remain less reliable than trust classifications. In addition, the choice of including more grammatical components for Chinese posts to combat its paratactic structure may have introduced more noise, which systematically increased the polarization of both sentiment scores and trust classifications in Chinese texts. Due to the token length limitation of the ML model, the use of ABSA-processed components is necessary to fit the entire text into the model, which limits the choices of this study. Future research could consider using large language models as zero-shot or few-shot classifiers to overcome this limitation.
+
+Furthermore, the small sample size of TCM posts on Reddit negatively impacts the statistical power of the analysis. This issue is prominent especially for eczema and flu medicines, and interpretations should be made with caution. This lack of posts is expected as TCM is not widely discussed in English-speaking countries, which further introduces sampling bias where non-representative opinions are drawn from a small pool of users. This is a fundamental limitation of opinion mining studies on niche topics, and future research could balance the data by online surveys.
+
+Prediction errors have been introduced repeatedly throughout this study, including language identification, relevance classification, tokenization of Chinese text, sentiment analysis, and trust classification. These sequential errors stack up and could lead to a less reliable result. However, given the messy nature of text data, such errors are unavoidable. What could be considered in future research is to use one model to perform multiple tasks at once, such as training a language model to classify both relatedness and trust.
+
+My study grouped medicines into three condition categories, and explored public opinion during and after COVID categorically. Since these categories are crude, they may not capture the full picture of public opinions on TCM. While a nuanced result is obtained in my study, future research covering more specific conditions over a finer time scale may uncover a general trend that is currently obscured by the coarse-grain analysis.
+
+\clearpage
+\printbibliography[heading=centeredbib, title={References}]
 
 \end{document}
