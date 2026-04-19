@@ -1,4 +1,4 @@
-# Post-COVID Trust in Traditional Chinese Medicine: *An Opinion Mining Study*
+# Post-COVID Trust in Traditional Chinese Medicine (TCM): *An Opinion Mining Study*
 [Link to this repo](https://github.com/P-mandevillei/trust_in_tcm_opinion_mining)
 ![flowchart showing the pipeline](./img/tcm_opinion_mining.png)
 
@@ -35,14 +35,14 @@ This notebook handles the initial data acquisition, cleaning, and filtering pipe
 **1. Scraping & Standardizing Reddit (English)**
 *   **Data Acquisition**: Posts are scraped using the Reddit json API, targeting English medicine keywords.
 *   **Filtering**: Filtered for posts on or after 2019 that match at least one keyword.
-*   **Language Identification**: The `fasttext` model is used to filter out posts that are not in English.
 *   **Restructuring**: The data is pivoted longer to organize by `post_id` and `medicine_name`.
+*   **Language Identification**: The `fasttext` model is used to filter out posts that are not in English.
 
 **2. Scraping & Standardizing Weibo (Chinese)**
 *   **Data Acquisition**: Posts are scraped using [MediaCrawler](https://github.com/NanmiCoder/MediaCrawler), targeting Chinese medicine keywords.
 *   **Filtering**: Filtered for posts on or after 2019 that match at least one keyword.
-*   **Language Identification**: The `fasttext` model is used to filter out posts that are not in Chinese.
 *   **Restructuring**: The data is pivoted longer to organize by `post_id` and `medicine_name`.
+*   **Language Identification**: The `fasttext` model is used to filter out posts that are not in Chinese.
 
 **3. Relevance Filtering & Deduplication**
 *   **Manual Annotation**: Random samples from the combined Reddit and Weibo datasets are manually annotated for medical relevance.
@@ -68,6 +68,6 @@ This notebook assigns sentiment scores and trust levels to the scraped Reddit an
 A series of statistical tests are performed on both ABSA and ML results to answer the following research questions:
 *   **Temporal Shifts**: Is there a difference between COVID and post-COVID opinions on the same types of medicines?
 *   **Medicine Types**: Is there a difference between post-COVID opinions regarding EBM vs. TCM?
-*   **Platform Preferences**: Is there a difference between post-COVID preferences for TCM on Weibo vs. Reddit?
+*   **Geocultural Preferences**: Is there a difference between post-COVID preferences for TCM on Weibo vs. Reddit?
 *   **Upvote-Weighted Analysis**:
 To account for community consensus and visibility, all these analyses are repeated using data weighted by user upvotes/likes.

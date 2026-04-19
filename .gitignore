@@ -1,4 +1,9 @@
 .env
 MediaCrawler/
 literature/
-deliverables/
+/deliverables/*
+!/deliverables/paper/
+/deliverables/paper/*
+!/deliverables/paper/final_paper.tex
+!/deliverables/paper/complit-4320.bib
+!/deliverables/paper/final_paper.pdf
