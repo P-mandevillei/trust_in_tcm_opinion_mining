@@ -1,5 +1,7 @@
 # Post-COVID Trust in Traditional Chinese Medicine (TCM): *An Opinion Mining Study*
-[Link to this repo](https://github.com/P-mandevillei/trust_in_tcm_opinion_mining)
+[Link to this repo](https://github.com/P-mandevillei/trust_in_tcm_opinion_mining)<br>
+[Metadata Description](./corpus/README.md)<br>
+[Final Paper](./deliverables/paper/final_paper.pdf)<br>
 ![flowchart showing the pipeline](./img/tcm_opinion_mining.png)
 
 ## Directory Overview

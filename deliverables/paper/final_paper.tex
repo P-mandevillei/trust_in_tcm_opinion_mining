@@ -13,6 +13,9 @@
 \usepackage{multirow}
 \usepackage{CJKutf8}
 \newcommand{\cn}[1]{\begin{CJK*}{UTF8}{gbsn}#1\end{CJK*}}
+\usepackage[english]{babel}
+\usepackage[autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
 \usepackage[style=apa,backend=biber]{biblatex}
 \defbibheading{centeredbib}[\bibname]{%
   \section*{\centering #1}%
@@ -207,7 +210,7 @@ Relevant parts of the sentences are then extracted based on the dependency tree.
     \label{tab:deps}
 \end{table}
 
-Moreover, unlike English, which is a hypotactic language with explicit connectives between clauses, Chinese is highly paratactic that depends on semantics and context to connect the clauses \parencite{mak_2015_parataxis}. This means that many components associated with the target aspect will be buried in separate clauses that are filtered out based on the rules above. As an example, the sentence in figure \ref{fig:absa_example_2} (which directly translates to "when having a fever why take TCM, take Ibuprofen, see effects fast") is seperated into 3 clauses, with the key emotional component "see effects fast" isolated from the aspect "Ibuprofen". To solve this problem, I also included children of the anchor word with dependency labels 'conj' (conjunct), 'parataxis', and 'ccomp' (clausal complement), as well as searching one level up the tree to find clauses that are siblings of the anchor word. This ensures that relevant contexts in Chinese texts can be captured.
+Moreover, unlike English, which is a hypotactic language with explicit connectives between clauses, Chinese is highly paratactic that depends on semantics and context to connect the clauses \parencite{mak_2015_parataxis}. This means that many components associated with the target aspect will be buried in separate clauses that are filtered out based on the rules above. As an example, the sentence in figure \ref{fig:absa_example_2} (which directly translates to "when having a fever why take TCM, take Ibuprofen, see effects fast") is seperated into 3 clauses, with the key emotional component "see effects fast" isolated from the aspect "Ibuprofen". To solve this problem, I also included children of the anchor word with dependency labels "conj" (conjunct), "parataxis", and "ccomp" (clausal complement), as well as searching one level up the tree to find clauses that are siblings of the anchor word. This ensures that relevant contexts in Chinese texts can be captured.
 
 \begin{figure}[htbp]
     \centering
