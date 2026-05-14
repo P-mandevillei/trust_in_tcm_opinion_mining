@@ -21,19 +21,6 @@
 - [`corpus/combined/lr_classifier.pkl`](corpus/combined/lr_classifier.pkl): parameters for the logistic regression model used to filter out irrelevant posts.
 - [`results/ml/deployed_trust_model.pt`](results/ml/deployed_trust_model.pt): weights of the final trust classification model. Note that rerunning the training process may not produce the exact same model due to extensive shuffling and dropout during training.
 
-## Replication of Results
-
-Generally, follow the Jupyter Notebooks ***strictly in sequence*** to replicate the results. (There are lots of overriding variables in the notebooks, so be careful.) Special considerations will be noted inside the Notebooks, including everything mentioned below. Refer to `requirements.txt` for the required packages. The project was developed on Linux Ubuntu 20.04 with some portions run on Google Colab with GPUs; behavior may differ on other operating systems. The relative paths in the notebooks either assume that the notebooks are run locally from the project root directory, or from a Google Colab notebook within the mounted Google Drive. The latter will be noted in the relevant sections, and you will need to upload the relevant files to your Google Drive.<br>
-
-Do ***NOT*** expect to replicate the scraping results, since the posts are dynamic.<br>
-
-To replicate the pre-processing results, follow the `scraping/scraping.ipynb` notebook. Note that the transformer encoding step is performed by connecting to [Google Colab](https://colab.research.google.com/) on one of the GPUs, and the import commands are in the second cell of the Notebook (***do not run the first cell on Colab, and do not run the second cell locally***). Change the paths accordingly when you mount your Google Drive. <br>
-
-To replicate the analyses, follow the `trust_analysis.ipynb` notebook. Note that for the manual annotation step for trust classification, it was performed on a pre-selected random subset of the data. Since the data has been re-ordered since then, re-running the sampling step will not yield the same rows. Also note that the training and prediction steps of the transformer models are performed on Google Colab with GPU. Like with the preprocessing, change the paths accordingly when you mount your Google Drive and run the second cell for imports. As mentioned, re-training the models might not yield the exact same weights.<br>
-
-Always be mindful of memory constraints when you run the notebook. Steps like training the transformer models and parallel processing of the dataset are memory-intensive, and could break on your machine if you do not have enough RAM.<br>
-**Use your own tokens when required by the code. My tokens are not provided for obvious reasons, and running without them might result in errors.**
-
 ## Preprocessing -- [`scraping/scraping.ipynb`](scraping/scraping.ipynb)
 
 This notebook handles the initial data acquisition, cleaning, and filtering pipeline. Because social media scraping returns a high volume of noisy or completely unrelated data, this notebook uses both rule-based filtering and a machine learning classifier to clean the dataset.
